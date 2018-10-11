@@ -1,9 +1,15 @@
 const game1 = new Hangman('cat', 2);
+const puzzle = document.getElementById('puzzle');
+const guesses = document.getElementById('guesses');
+
+
+puzzle.textContent = game1.getPuzzle();
+guesses.textContent = game1.getStatusMessage();
 
 window.addEventListener('keypress', function (e) {
-    document.getElementsByTagName('body').innerText = '';
     const guess = String.fromCharCode(e.charCode);
     game1.makeGuess(guess);
-    game1.render(game1.getPuzzle());
-    console.log(game1.status);
+    puzzle.textContent = game1.getPuzzle();
+    guesses.textContent = game1.getStatusMessage();
+    game1.getPuzzle();
 });
