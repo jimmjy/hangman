@@ -26,11 +26,11 @@ class Hangman {
 
     getStatusMessage() {
         if (this.status === 'Playing') {
-            return `Playing -> Guesses left: ${this.guesses}`;
+            return `Guesses left: ${this.guesses}`;
         } else if (this.status === 'Failed') {
-            return `Failed -> Nice try! The word was "${this.word.join('')}"`
+            return `Nice try! The word was "${this.word.join('')}"`
         } else if (this.status === 'Finished') {
-            return `Finished -> Great work! You guessed the word`;
+            return `Great work! You guessed the word`;
         }
     };
 
