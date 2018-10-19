@@ -23,6 +23,9 @@ getPuzzle((error, puzzle) => {
     }
 });
 
-console.log('Happens first');
+const countryCode = 'CA';
+getCountry(countryCode, ((country) => {
+    console.log(country);
+}))
 
 
