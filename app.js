@@ -15,21 +15,19 @@ window.addEventListener('keypress', function (e) {
     guesses.textContent = game1.statusMessage;
 });
 
-getPuzzle('2', (error, puzzle) => {
-    if (error) {
-        console.log(`Error: ${error}`);
-    } else {
-        console.log(puzzle);
-    }
+getPuzzle(2).then((words) => {
+    console.log(words);
+}, (err) => {
+    console.log(err);
 });
 
 const countryCode = 'zw';
-getCountry(countryCode, ((error,country) => {
+getCountry (countryCode, ((error,country) => {
     if (error) {
         console.log(error);
     } else {
         console.log(`Country name: ${country}`);
     }
-}))
+}));
 
 

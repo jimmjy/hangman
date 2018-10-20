@@ -1,4 +1,4 @@
-const getPuzzle = (wordCount, passedFunction) => {
+const getPuzzle = (wordCount) => new Promise((resolve, reject) => {
     
     // http request
     const request = new XMLHttpRequest();
@@ -9,30 +9,33 @@ const getPuzzle = (wordCount, passedFunction) => {
     request.addEventListener('readystatechange', (e) => {
         if (e.target.readyState === 4 && e.target.status === 200) {
             const data = JSON.parse(e.target.responseText);
-            passedFunction(undefined, data.puzzle);
+            resolve(data.puzzle);
         } else if (e.target.readyState === 4) {
-            passedFunction('Error loading data', undefined)
+            reject('Unable to find words for puzzle');
         }
     });
-    // callback('Some fake puzzle');
-}
+});
 
-const getCountry = (code, callback) => {
-
-    //http request
+const getCountry = (countryCode) => new Promise((resolve, reject) => {
+    //setup http request
     const request = new XMLHttpRequest();
-
-    request.addEventListener('readystatechange', (e) => {
-        if(e.target.readyState === 4 && e.target.status === 200) {
-            const data = JSON.parse(e.target.response);
-            const country = data.find((country) => country.alpha2Code === code.toUpperCase());
-            callback(undefined, country.name);
-            
-        } else if (e.target.readyState === 4) {
-            callback('Country not found', undefined);
-        };
-    });
 
     request.open('GET', 'https://restcountries.eu/rest/v2/all');
     request.send();
-};
+
+    request.addEventListener('readystatechange', (e) => {
+        if(e.target.readyState === 4 && e.target.status === 200) {
+            const jsonData = JSON.parse(e.target.responseText);
+            const country = jsonData.find((country) => country.alpha2Code === countryCode.toUpperCase());
+            resolve(country.name);
+        } else if (e.target.readyState === 4) {
+            reject('this did not work');
+        }
+    });
+});
+
+getCountry('cm').then((country) => {
+    console.log(country);
+}, (err) => {
+    console.log(`Error: ${err}`);
+}) ;
