@@ -15,7 +15,7 @@ window.addEventListener('keypress', function (e) {
     guesses.textContent = game1.statusMessage;
 });
 
-getPuzzle((error, puzzle) => {
+getPuzzle('2', (error, puzzle) => {
     if (error) {
         console.log(`Error: ${error}`);
     } else {
@@ -23,9 +23,13 @@ getPuzzle((error, puzzle) => {
     }
 });
 
-const countryCode = 'CA';
-getCountry(countryCode, ((country) => {
-    console.log(country);
+const countryCode = 'zw';
+getCountry(countryCode, ((error,country) => {
+    if (error) {
+        console.log(error);
+    } else {
+        console.log(`Country name: ${country}`);
+    }
 }))
 
 
