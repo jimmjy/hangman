@@ -5,7 +5,7 @@ const getPuzzle = async (wordCount) => {
         const data = await response.json();
         return data.puzzle;
     } else {
-        throw new Error('No words found :(');
+        throw new Error('No words found :('); 
     }
 };
 
