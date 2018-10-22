@@ -2,8 +2,7 @@
 let game1;
 const puzzleEl = document.getElementById('puzzle');
 const guesses = document.getElementById('guesses');
-
-// configure inital DOM with inforation for user to see
+document.querySelector('#reset').addEventListener('click', () => {startGame();});
 
 //recognize user input pressed on display
 window.addEventListener('keypress', function (e) {
@@ -12,13 +11,13 @@ window.addEventListener('keypress', function (e) {
     render();
 });
 
+//start game function
 const startGame = async () => {
     const puzzle = await getPuzzle(2);
     game1 = new Hangman(puzzle, 4);
     render();
 };
 
-document.querySelector('#reset').addEventListener('click', () => {startGame();});
 
 startGame();
 

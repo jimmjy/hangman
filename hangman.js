@@ -1,3 +1,4 @@
+//used a class to structure functions
 class Hangman {
     constructor(word, guesses) {
         this.word = word.toLowerCase().split('');
@@ -7,12 +8,15 @@ class Hangman {
     };
 
     makeGuess(character) {
+        //disregard if user put capital or not
         character = character.toLowerCase();
+        
 
         if (this.status.toLowerCase() !== 'playing') {
             return;
         }
 
+        //checks if we have guessed a letter or not and adds it if we didn't
         if (!this.guessedLetters.includes(character)) {
             this.guessedLetters.push(character);
 
@@ -21,9 +25,11 @@ class Hangman {
             }
         }
 
+        //refreshes status message
         this.currentStatus();
     };
 
+    //getter for the actual status
     get statusMessage() {
         if (this.status === 'Playing') {
             return `Guesses left: ${this.guesses}`;
@@ -34,6 +40,7 @@ class Hangman {
         }
     };
 
+    //getter for puzzle words and what letters to show
     get puzzle() {
         let puzzle = '';
 
@@ -48,6 +55,7 @@ class Hangman {
         return puzzle;
     };
 
+    //updates the status to user
     currentStatus() {
         const finished = this.word.every((letter) => this.guessedLetters.includes(letter) || letter === ' ');
 
