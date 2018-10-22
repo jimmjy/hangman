@@ -33,13 +33,15 @@ const getLocation = () => {
         if (response.status === 200) {
             return response.json();
         } else {
-            throw new Error('Something went wrong');
-        }
-    }).then((data) => data);
+            throw new Error('Data not found');
+        };
+    }).then((data) => {
+        return data;
+    });
 };
 
-getLocation().then((data) => console.log(`You are from ${data.city} ${data.region} ${data.country}`)).catch((err) => console.log(err));
-
 getLocation().then((data) => {
-    return getAnotherCountry(data.country);
-}).then((data) => console.log(`the chained country: ${data.name}`)).catch((err) => console.log(err));
+    return data;
+}).then((country) => country.country).then((country) => {
+    getAnotherCountry(country).then((data) => console.log(data.name));
+}).catch((err) => console.log(err));
