@@ -7,7 +7,7 @@ If you click reset, it will give a whole new set of words to play from.
 
 To dos:
 - Add styling
-- Adding diffculties
+- Adding diffculties that will give more word options
 - Add option to choose how many failed attempts user wants
 
 I hope you enjoy
